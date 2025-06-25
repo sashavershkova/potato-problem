@@ -8,13 +8,32 @@ class Plant:
 
     def __str__(self):
         return f"I am a {type(self).__name__} and I have {self.energy} energy!" 
+    
 
+class Potato(Plant):
+    def __init__(self, starting_energy):
+        super().__init__(starting_energy)
+        self.tubers = []
+    
+    def sprout_tuber(self):
+        if self.energy > 30:
+            new_tuber = Tuber()
+            self.tubers.append(new_tuber)
+            self.energy -= 30
+    
+    def absorb_sunlight(self, sunlight_energy):
+        if self.tubers:
+            self.energy += sunlight_energy/2
+            num_of_tubers = len(self.tubers)
+            energy_for_one_tuber = (sunlight_energy/2)/num_of_tubers
+            for tuber in self.tubers:
+                tuber.energy += energy_for_one_tuber
+        else: 
+            self.energy += sunlight_energy
 
-##########################################
-#       Add your new classes here!       #
-# (Make sure not to accidentally indent) #
-##########################################
-
+class Tuber:
+    def __init__(self):
+        self.energy = 30
 
 ########## WAVE 1 ##########
 # Checking the behavior for creating an instance of Potato
